@@ -1,0 +1,20 @@
+<div class="container bg">
+    <div class="row col-lg-12 date-header">
+        <p class="text-right">{{ dateHeader }}</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row col-lg-12">
+        <div class="card col-md-2" *ngFor="let header of headers">
+            <div class="card-header">
+                {{ header }}
+            </div>
+            <div class="card-body" *ngFor="let header of headers">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">Button</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
