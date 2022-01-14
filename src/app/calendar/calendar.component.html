@@ -1,14 +1,15 @@
 <div class="container bg">
     <div class="row col-lg-12 date-header">
-        <p class="text-right">{{ dateHeader }}</p>
+        <p class="text-right">{{ getNameDayOfWeek() + ' - ' + dateHeader }}</p>
     </div>
 </div>
 
 <div class="container">
     <div class="row col-lg-12">
-        <div class="card col-md-2" *ngFor="let header of headers">
+        <div class="card col-md-2 text-center" *ngFor="let header of headers; let i = index;">
             <div class="card-header">
                 {{ header }}
+                {{ headersDay[i] }}
             </div>
             <div class="card-body" *ngFor="let header of headers">
                 <div class="d-grid gap-2">
