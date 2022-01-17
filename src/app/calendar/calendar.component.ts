@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class CalendarComponent implements OnInit {
 
   headers: string[] = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
-  headersDay: string[] = []
+  headerDays: string[] = []
+  hoursOfDayOfWeek: string[] = [];
 
   dateHeader!: string;
   date: Date = new Date();;
@@ -18,6 +19,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.formatDate()
     this.getDaysOfWeek()
+    this.getHoursOfDaysOfWeek()
   }
 
   formatDate(){
@@ -47,7 +49,7 @@ export class CalendarComponent implements OnInit {
     for(let i = 0; i < this.date.getDay(); i++){
       day = this.date.getDate() - i
       console.log(day)
-      this.headersDay.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
+      this.headerDays.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
     }
   }
 
@@ -56,12 +58,12 @@ export class CalendarComponent implements OnInit {
     for(let i = this.date.getDay(); i < 6; i++){
       count++;
       day = this.date.getDate() + count
-      this.headersDay.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
+      this.headerDays.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
     }
   }
 
-  sortDays(headersDay: string[]): string[]{
-    return headersDay.sort()
+  sortDays(headerDays: string[]): string[]{
+    return headerDays.sort()
   }
 
   getDaysOfWeek(){
@@ -71,7 +73,35 @@ export class CalendarComponent implements OnInit {
 
     this.getDaysOfWeekInRightSide(day);
 
-    this.headersDay = this.sortDays(this.headersDay)
+    this.headerDays = this.sortDays(this.headerDays)
+  }
+
+  getHoursOfDaysOfWeek(){
+    for(let i = 8; i <= 17; i++){
+      this.hoursOfDayOfWeek.push(this.formatHours(i))
+    }
+
+  }
+
+  formatHalfHours(hour: number): string{
+    if(hour <= 9){
+      return "0" + hour + ":30"
+    }
+
+    return hour + ":30"
+  }
+
+  formatHours(hour: number): string{
+    if(hour <= 9){
+      return "0" + hour + ":00"
+    }
+
+    return hour + ":00"
+  }
+
+  marcarHora(day: string, hour: string){
+    console.log(day)
+    console.log(hour)
   }
 
 }
