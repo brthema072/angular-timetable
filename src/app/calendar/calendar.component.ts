@@ -78,6 +78,7 @@ export class CalendarComponent implements OnInit {
   getHoursOfDaysOfWeek(){
     for(let i = 8; i <= 17; i++){
       this.hoursOfDayOfWeek.push(this.formatHours(i))
+      this.hoursOfDayOfWeek.push(this.formatHalfHours(i))
     }
 
   }
