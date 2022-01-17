@@ -48,7 +48,6 @@ export class CalendarComponent implements OnInit {
   getDaysOfWeekInLeftSide(day: number){
     for(let i = 0; i < this.date.getDay(); i++){
       day = this.date.getDate() - i
-      console.log(day)
       this.headerDays.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
     }
   }
