@@ -17,7 +17,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.formatDate()
-    this.getDayOfWeek()
+    this.getDaysOfWeek()
   }
 
   formatDate(){
@@ -36,29 +36,42 @@ export class CalendarComponent implements OnInit {
   }
 
   getNameDayOfWeek(): string{
-    return this.headers[this.date.getDay() == 0 ? 1 : this.date.getDay() - 1]
-  }
-
-  getDayOfWeek(){
-    let day: number = 0
-
-    for(let i = 0; i < this.date.getDay(); i++){
-      day = this.date.getDate() - i
-      this.headersDay.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
+    if(this.headers[this.date.getDay() == 0 ? -1 : this.date.getDay() - 1] == undefined){
+      return "Domingo"
     }
 
+    return this.headers[this.date.getDay() == 0 ? -1 : this.date.getDay() - 1]
+  }
+
+  getDaysOfWeekInLeftSide(day: number){
+    for(let i = 0; i < this.date.getDay(); i++){
+      day = this.date.getDate() - i
+      console.log(day)
+      this.headersDay.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
+    }
+  }
+
+  getDaysOfWeekInRightSide(day: number){
     let count: number = 0;
     for(let i = this.date.getDay(); i < 6; i++){
       count++;
       day = this.date.getDate() + count
       this.headersDay.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
     }
-
-    this.headersDay = this.sortDays(this.headersDay)
   }
 
   sortDays(headersDay: string[]): string[]{
     return headersDay.sort()
+  }
+
+  getDaysOfWeek(){
+    let day: number = 0
+
+    this.getDaysOfWeekInLeftSide(day);
+
+    this.getDaysOfWeekInRightSide(day);
+
+    this.headersDay = this.sortDays(this.headersDay)
   }
 
 }
