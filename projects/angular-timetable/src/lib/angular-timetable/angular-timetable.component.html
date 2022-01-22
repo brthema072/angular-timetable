@@ -1,0 +1,21 @@
+<div class="container bg">
+    <div class="row col-lg-12 date-header">
+        <p class="text-right">{{ getNameDayOfWeek() + ' - ' + dateHeader }}</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row col-lg-12">
+        <div class="card col-md-2 text-center" *ngFor="let header of headers; let i = index;">
+            <div class="card-header">
+                {{ header }} <br>
+                {{ headerDays[i] }}
+            </div>
+            <div class="card-body" *ngFor="let hour of hoursOfDayOfWeek">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour)">{{ hour }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -103,6 +103,37 @@
           }
         }
       }
+    },
+    "angular-timetable": {
+      "projectType": "library",
+      "root": "projects/angular-timetable",
+      "sourceRoot": "projects/angular-timetable/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/angular-timetable/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/angular-timetable/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/angular-timetable/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/angular-timetable/src/test.ts",
+            "tsConfig": "projects/angular-timetable/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-timetable/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "timetable"
