@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-timetable-ff80c": {
+      "hosting": {
+        "timetable": [
+          "angular-timetable-ff80c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-timetable-ff80c"
+  }
+}

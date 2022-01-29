@@ -101,6 +101,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "timetable:build:production",
+            "firebaseProject": "angular-timetable-ff80c",
+            "firebaseHostingSite": "angular-timetable-ff80c"
+          }
         }
       }
     },
