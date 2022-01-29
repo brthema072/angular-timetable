@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'lib-angular-timetable',
@@ -10,11 +10,16 @@ export class AngularTimetableComponent implements OnInit {
   /**
    * Hora de início do expediente
    */
-  @Input() hourOfficeBeginning: number = 8;
+  @Input() startHourOffice: number = 8;
   /**
    * Hora do fim do expediente
    */
-  @Input() hourOfficeEnding: number = 17;
+  @Input() endHourOffice: number = 17;
+
+  /**
+   * Evento disparado quando o botão com horário do dia é clicado.
+  */
+  @Output() applyTime = new EventEmitter<any>();
 
   headers: string[] = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
   headerDays: string[] = []
@@ -85,7 +90,7 @@ export class AngularTimetableComponent implements OnInit {
   }
 
   getHoursOfDaysOfWeek(){
-    for(let i = this.hourOfficeBeginning; i <= this.hourOfficeEnding; i++){
+    for(let i = this.startHourOffice; i <= this.endHourOffice; i++){
       this.hoursOfDayOfWeek.push(this.formatHours(i))
       this.hoursOfDayOfWeek.push(this.formatHalfHours(i))
     }
@@ -109,8 +114,10 @@ export class AngularTimetableComponent implements OnInit {
   }
 
   marcarHora(day: string, hour: string){
-    console.log(day)
-    console.log(hour)
+    this.applyTime.emit({
+      day: day,
+      hour: hour
+    })
   }
 
 }

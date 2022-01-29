@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TimeModel } from '../model/time';
 
 @Component({
   selector: 'app-calendar',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarComponent implements OnInit {
 
-  beginningHour: number = 8
-  endingHour: number = 17
+  startOffice: number = 8
+  endOffice: number = 17
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getClickedTime(time: TimeModel){
+    console.log(time);
   }
 
 }
