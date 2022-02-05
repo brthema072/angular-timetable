@@ -13,7 +13,9 @@
             </div>
             <div class="card-body" *ngFor="let hour of hoursOfDayOfWeek">
                 <div class="d-grid gap-2">
-                    <button class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour)">{{ hour }}</button>
+                    <button *ngIf="openModel" class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour)"
+                        data-bs-toggle="modal" data-bs-target="#confirmTime">{{ hour }}</button>
+                    <button *ngIf="!openModel" class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour)">{{ hour }}</button>
                 </div>
             </div>
         </div>

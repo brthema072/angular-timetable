@@ -1,0 +1,48 @@
+<div class="modal fade" id="register" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Criar Nova Conta!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="registerForm">
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Nome completo:</label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <p *ngIf="registerForm.controls.name.errors?.required == true" class="requiredfield">
+                            Nome obrigatório
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email-text" class="col-form-label">E-mail:</label>
+                        <input type="text" class="form-control" formControlName="email">
+                        <p *ngIf="registerForm.controls.email.errors?.required == true" class="requiredfield">
+                            E-mail obrigatório
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone-text" class="col-form-label">Celular:</label>
+                        <input type="number" class="form-control" formControlName="phone">
+                        <p *ngIf="registerForm.controls.phone.errors?.required == true" class="requiredfield">
+                            Celular obrigatório <br>
+                            <span class="maskfield">Apenas números!</span>
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password-text" class="col-form-label">Senha:</label>
+                        <input type="password" class="form-control" formControlName="password">
+                        <p *ngIf="registerForm.controls.password.errors?.required == true" class="requiredfield">
+                            Senha obrigatório
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="save()" data-bs-dismiss="modal"
+                    [disabled]="registerForm.status == 'INVALID'">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

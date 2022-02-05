@@ -9,17 +9,21 @@ export class AngularTimetableComponent implements OnInit {
 
   /**
    * Hora de início do expediente
-   */
+  */
   @Input() startHourOffice: number = 8;
   /**
    * Hora do fim do expediente
-   */
+  */
   @Input() endHourOffice: number = 17;
 
   /**
    * Evento disparado quando o botão com horário do dia é clicado.
   */
   @Output() applyTime = new EventEmitter<any>();
+  /**
+   * Define se ao clicar no botão abrirá um modal
+  */
+  @Input() openModel: boolean = false;
 
   headers: string[] = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
   headerDays: string[] = []

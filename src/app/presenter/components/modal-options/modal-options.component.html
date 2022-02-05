@@ -1,0 +1,33 @@
+<!-- Button trigger modal -->
+<div class="d-flex flex-row-reverse bd-highlight">
+    <button type="button" class="btn btn-warning float-sm-right col-lg-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Entrar
+    </button>
+</div>
+  
+  <!-- Father Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Atenção!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <strong>Possui um acesso?</strong><br>
+                Para agendar um horário é necessário se autenticar ou criar uma conta!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#login">Tenho uma conta!</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#register">Criar uma conta!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-modal-login></app-modal-login>
+
+<app-modal-register></app-modal-register>
+
+<app-modal-confirm-time [timeTable]="timeTable"></app-modal-confirm-time>
