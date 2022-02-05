@@ -3,6 +3,7 @@ import { Firestore, collection } from '@angular/fire/firestore';
 import { createUserWithEmailAndPassword, deleteUser, getAuth, signInWithEmailAndPassword, User } from 'firebase/auth';
 import { addDoc, getDocs, query, where } from 'firebase/firestore';
 import { UserModel } from 'src/app/model/user';
+import { LogService } from '../log/log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,17 @@ import { UserModel } from 'src/app/model/user';
 export class UserService {
 
   private userReference = collection(this.firestore, "users")
-  private loggerReference = collection(this.firestore, "logs")
 
   private auth = getAuth();
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore, private logService: LogService) { }
 
   login(user: UserModel): Promise<void | User> {
     return signInWithEmailAndPassword(this.auth, user.email, user.password).then((res) => {
       user.uid = res.user.uid
       return this.getUserByUid(user)
     }).catch((err) => {
-      this.registerErrorLoogger(err)
+      this.logService.registerErrorLoogger(err)
       return err
     })
   }
@@ -32,7 +32,7 @@ export class UserService {
       this.addUser(user)
       return res.user
     }).catch((err) => {
-      console.log(err)
+      this.logService.registerErrorLoogger(err)
       return err
     })
   }
@@ -50,25 +50,11 @@ export class UserService {
     if(user != null){
       let displayName = user.displayName
       deleteUser(user).then((res) => {
-        this.registerMessageLoogger("user " + displayName + " deleted")
+        this.logService.registerMessageLoogger("user " + displayName + " deleted")
       }).catch((err) => {
-        this.registerErrorLoogger(err)
+        this.logService.registerErrorLoogger(err)
       })
     }
-  }
-
-  private registerMessageLoogger(message: string){
-    addDoc(this.loggerReference, {
-      message: message,
-      date: new Date()
-    })
-  }
-
-  private registerErrorLoogger(error: any){
-    addDoc(this.loggerReference, {
-      error: error.toString(),
-      date: new Date()
-    })
   }
 
   private addUser(user: UserModel){
@@ -78,7 +64,7 @@ export class UserService {
       email: user.email,
       phone: user.phone
     }).catch((err) => {
-      this.registerErrorLoogger(err)
+      this.logService.registerErrorLoogger(err)
       this.deleteCurrentUser()
     })
   }

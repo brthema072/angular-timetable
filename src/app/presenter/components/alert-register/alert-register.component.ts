@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-alert',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css']
+  selector: 'app-alert-register',
+  templateUrl: './alert-register.component.html',
+  styleUrls: ['./alert-register.component.css']
 })
-export class AlertComponent implements OnInit {
+export class AlertRegisterComponent implements OnInit {
 
   @Input() successShowAlert: boolean = false;
   @Input() errorShowAlert: boolean = false;

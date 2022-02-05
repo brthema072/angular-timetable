@@ -1,0 +1,13 @@
+<div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="successShowAlert">
+    <strong>Conta registrada com sucesso!</strong>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorShowAlert">
+    <strong>Houve uma falha ao registrar sua conta!</strong>
+    <div>
+        Por favor, reporte o problema para o e-mail <a href="https://firebase.google.com/docs/database/web/read-and-write" class="alert-link" target="_blank">b@b.com</a> com o horário que você viu o problema!
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

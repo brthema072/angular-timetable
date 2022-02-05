@@ -9,6 +9,9 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ModalRegisterComponent implements OnInit {
 
+  successShowAlert: boolean = false;
+  errorShowAlert: boolean = false;
+
   public registerForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService) { }
@@ -24,8 +27,22 @@ export class ModalRegisterComponent implements OnInit {
 
   save(){
     if(this.registerForm.valid){
-      this.userService.registerUser(this.registerForm.value).then((res) => {
-        console.log(res)
+      this.userService.registerUser(this.registerForm.value).then((res: any) => {
+        if(res.toString().includes("FirebaseError")){
+          this.errorShowAlert = true
+
+          setTimeout(() => {
+            this.errorShowAlert = false
+          }, 5000);
+        }else{
+          this.successShowAlert = true
+
+          setTimeout(() => {
+            this.successShowAlert = false
+          }, 5000);
+        }
+        this.registerForm.reset()
+
       })
     }
   }

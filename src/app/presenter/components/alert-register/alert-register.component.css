@@ -1,0 +1,7 @@
+.alert{
+    width: 50vw;
+    float: right;
+    margin: 20px 0 0 48vw;
+    position: absolute;
+    z-index: 1;
+}

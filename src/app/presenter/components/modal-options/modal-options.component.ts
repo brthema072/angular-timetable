@@ -9,9 +9,18 @@ export class ModalOptionsComponent implements OnInit {
 
   @Input() timeTable: any;
 
+  userLocalStorage: string = localStorage.getItem("user") ?? "";
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  logout(){
+    localStorage.removeItem("user")
+    setTimeout(() => {
+      location.reload()
+    }, 500);
   }
 
 }

@@ -11,23 +11,27 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertComponent } from './presenter/components/alert/alert.component';
+import { AlertConfirmTimeComponent } from './presenter/components/alert-confirm-time/alert-confirm-time.component';
 import { CalendarComponent } from './presenter/calendar/calendar.component';
 import { ModalRegisterComponent } from './presenter/components/modal-register/modal-register.component';
 import { ModalLoginComponent } from './presenter/components/modal-login/modal-login.component';
 import { ModalOptionsComponent } from './presenter/components/modal-options/modal-options.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalConfirmTimeComponent } from './presenter/components/modal-confirm-time/modal-confirm-time.component';
+import { AllertLoginComponent } from './presenter/components/allert-login/allert-login.component';
+import { AlertRegisterComponent } from './presenter/components/alert-register/alert-register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalendarComponent,
-    AlertComponent,
+    AlertConfirmTimeComponent,
     ModalRegisterComponent,
     ModalLoginComponent,
     ModalOptionsComponent,
-    ModalConfirmTimeComponent
+    ModalConfirmTimeComponent,
+    AllertLoginComponent,
+    AlertRegisterComponent
   ],
   imports: [
     BrowserModule,

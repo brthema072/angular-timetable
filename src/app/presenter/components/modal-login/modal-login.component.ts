@@ -12,6 +12,11 @@ export class ModalLoginComponent implements OnInit {
   
   public loginForm!: FormGroup;
 
+  successShowAlert: boolean = false;
+  errorShowAlert: boolean = false;
+
+  userName: string = "";
+
   constructor(private formBuilder: FormBuilder, private userService: UserService) { }
 
   ngOnInit(): void {
@@ -28,15 +33,33 @@ export class ModalLoginComponent implements OnInit {
   login(){
     if(this.loginForm.valid){
       this.userService.login(this.buildUser(this.loginForm.value)).then((res: any) => {
-        localStorage.setItem("user", JSON.stringify({
-          name: res.name,
-          email: res.email,
-          phone: res.phone
-        }))
+        if(res.toString().includes("FirebaseError")){
+          this.errorShowAlert = true
 
-        setTimeout(() => {
-          location.reload()
-        }, 500);
+          setTimeout(() => {
+            this.errorShowAlert = false
+          }, 5000);
+        }else{
+          this.successShowAlert = true
+
+          setTimeout(() => {
+            this.successShowAlert = false
+          }, 5000);
+
+          this.userName = res.name
+
+          localStorage.setItem("user", JSON.stringify({
+            name: res.name,
+            email: res.email,
+            phone: res.phone
+          }))
+  
+          setTimeout(() => {
+            location.reload()
+          }, 5001);
+        }
+        this.loginForm.reset()
+
       })
     }
   }
