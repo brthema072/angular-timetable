@@ -19,11 +19,13 @@ export class AngularTimetableComponent implements OnInit {
   /**
    * Evento disparado quando o botão com horário do dia é clicado.
   */
-  @Output() applyTime = new EventEmitter<any>();
+  @Output() applyTimeEmitter = new EventEmitter<any>();
   /**
    * Define se ao clicar no botão abrirá um modal
   */
   @Input() openModel: boolean = false;
+
+  @Output() daysOfWeekEmitter = new EventEmitter<any>();
 
   headers: string[] = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
   headerDays: string[] = []
@@ -146,6 +148,8 @@ export class AngularTimetableComponent implements OnInit {
     this.getDaysOfWeekInRightSide(day);
 
     this.headerDays = this.sortDays(this.headerDays)
+
+    this.daysOfWeekEmitter.emit(this.headerDays)
   }
 
   getHoursOfDaysOfWeek(){
@@ -173,7 +177,7 @@ export class AngularTimetableComponent implements OnInit {
   }
 
   marcarHora(day: string, hour: string){
-    this.applyTime.emit({
+    this.applyTimeEmitter.emit({
       day: day,
       hour: hour
     })

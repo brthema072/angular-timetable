@@ -1,3 +1,4 @@
 <app-modal-options [timeTable]="timetableModel"></app-modal-options>
 
-<lib-angular-timetable [startHourOffice]="startOffice" [endHourOffice]="endOffice" (applyTime)="getClickedTime($event)" [openModel]="true"></lib-angular-timetable>
+<lib-angular-timetable [startHourOffice]="startOffice" [endHourOffice]="endOffice" (applyTimeEmitter)="getClickedTime($event)"
+    (daysOfWeekEmitter)="getDaysOfWeek($event)" [openModel]="true"></lib-angular-timetable>
