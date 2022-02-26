@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Agenda, TemplateHours } from '../models/agenda';
 
 @Component({
   selector: 'lib-angular-timetable',
   templateUrl: './angular-timetable.component.html',
   styleUrls: ['./angular-timetable.component.css']
 })
-export class AngularTimetableComponent implements OnInit {
+export class AngularTimetableComponent implements OnInit, AfterViewInit {
 
   /**
    * Hora de início do expediente
@@ -24,12 +25,20 @@ export class AngularTimetableComponent implements OnInit {
    * Define se ao clicar no botão abrirá um modal
   */
   @Input() openModel: boolean = false;
-
+  /**
+   * Evento disparado para emitir os dias da semana quando o header é construidos.
+  */
   @Output() daysOfWeekEmitter = new EventEmitter<any>();
+  /**
+   * Array de dias já agendados.
+  */
+  @Input() scheduledDaysAndHours: string[] = []
 
   headers: string[] = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"]
   headerDays: string[] = []
-  hoursOfDayOfWeek: string[] = [];
+  hoursOfDayOfWeek: string[] = []
+  
+  agenda: Agenda = new Agenda([]);
 
   dateHeader!: string;
   date: Date = new Date();
@@ -39,7 +48,21 @@ export class AngularTimetableComponent implements OnInit {
   ngOnInit(): void {
     this.formatDate()
     this.getDaysOfWeek()
-    this.getHoursOfDaysOfWeek()
+  }
+
+  ngAfterViewInit(): void {
+    this.hoursOfDayOfWeek.shift()
+
+    let interval = setInterval(() => {
+      if(this.scheduledDaysAndHours.length > 0){
+        this.defineScheduledDays()
+      }
+    }, 1000)
+
+    setTimeout(() => {
+      clearInterval(interval)
+    }, 3000);
+
   }
 
   formatDate(){
@@ -149,7 +172,20 @@ export class AngularTimetableComponent implements OnInit {
 
     this.headerDays = this.sortDays(this.headerDays)
 
+    this.getHoursOfDaysOfWeek()
+
+    this.popularAgenda()
+
     this.daysOfWeekEmitter.emit(this.headerDays)
+  }
+
+  popularAgenda(){
+    for(let i = 0; i < this.headerDays.length; i++){
+      this.agenda.templateDays.push({
+        day: this.headerDays[i],
+        templateHours: this.hoursOfDayOfWeek.map((hour) => new TemplateHours(hour, false))
+      })
+    }
   }
 
   getHoursOfDaysOfWeek(){
@@ -181,6 +217,19 @@ export class AngularTimetableComponent implements OnInit {
       day: day,
       hour: hour
     })
+  }
+
+  defineScheduledDays(){
+    this.agenda.templateDays.map((day) => {
+      day.templateHours.map((hour) => {
+        this.scheduledDaysAndHours.map((scheduledDay) => {
+          if(day.day + ":" + hour.hour == scheduledDay){
+            hour.scheduledHour = true
+          }
+        })
+      })
+    })
+    
   }
 
 }

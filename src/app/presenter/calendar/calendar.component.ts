@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TimetableModel } from 'src/app/model/timetable';
 import { UserModel } from 'src/app/model/user';
+import { AgendaService } from 'src/app/services/agenda/agenda.service';
 import { TimeModel } from '../../model/time';
 
 
@@ -18,9 +19,11 @@ export class CalendarComponent implements OnInit {
 
   timetableModel: TimetableModel | null = null;
 
-  constructor() { }
+  scheduledDaysAndHours: string[] = []
 
-  ngOnInit(): void {    
+  constructor(private agendaService: AgendaService) { }
+
+  ngOnInit(): void {
   }
 
   private buildUser(user: string){
@@ -32,6 +35,14 @@ export class CalendarComponent implements OnInit {
       let user: UserModel = this.buildUser(this.userLocalStorage!)
       this.timetableModel = new TimetableModel(time, user)
     }
+  }
+
+  getDaysOfWeek(event: string[]){
+    this.agendaService.getAgendaCurrentTime(event).then((res) => {
+      res.forEach((doc) => {
+        this.scheduledDaysAndHours.push(doc.data().day + ":" + doc.data().hour)
+      })
+    })
   }
 
 }

@@ -11,11 +11,15 @@
                 {{ header }} <br>
                 {{ headerDays[i] }}
             </div>
-            <div class="card-body" *ngFor="let hour of hoursOfDayOfWeek">
-                <div class="d-grid gap-2">
-                    <button *ngIf="openModel" class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour)"
-                        data-bs-toggle="modal" data-bs-target="#confirmTime">{{ hour }}</button>
-                    <button *ngIf="!openModel" class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour)">{{ hour }}</button>
+            <div class="card-body" *ngFor="let hour of agenda.templateDays[i].templateHours">
+                <div class="d-grid gap-2" *ngIf="hour.scheduledHour">
+                    <button class="btn btn-danger" type="button" disabled>{{ hour.hour }}</button>
+                </div>
+                <div class="d-grid gap-2" *ngIf="!hour.scheduledHour">
+                    <button *ngIf="openModel" class="btn btn-info" type="button" (click)="marcarHora(headerDays[i], hour.hour)"
+                        data-bs-toggle="modal" data-bs-target="#confirmTime">{{ hour.hour }}</button>
+                    <button *ngIf="!openModel" class="btn btn-info" type="button"
+                        (click)="marcarHora(headerDays[i], hour.hour)">{{ hour.hour }}</button>
                 </div>
             </div>
         </div>
