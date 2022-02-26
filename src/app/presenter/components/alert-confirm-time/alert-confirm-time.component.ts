@@ -15,4 +15,7 @@ export class AlertConfirmTimeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  reloadPage(){
+    location.reload()
+  }
 }

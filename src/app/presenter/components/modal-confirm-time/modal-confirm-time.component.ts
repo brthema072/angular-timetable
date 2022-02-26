@@ -36,7 +36,8 @@ export class ModalConfirmTimeComponent implements OnInit {
 
         setTimeout(() => {
           this.successShowAlert = false
-        }, 5000);
+          location.reload()
+        }, 3000);
       }else{
         this.errorShowAlert = true
 
