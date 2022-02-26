@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import { getDocs, query, where } from 'firebase/firestore';
 import { TimeModel } from 'src/app/model/time';
 import { UserModel } from 'src/app/model/user';
 import { LogService } from '../log/log.service';
@@ -27,5 +28,11 @@ export class AgendaService {
       this.logService.registerErrorLoogger(err)
       return false;
     })
+  }
+
+  async getAgendaCurrentTime(getDaysOfWeek: string[]){
+    let q = query(this.agendaReference, where("day", "in", [...getDaysOfWeek]))
+    let response = await getDocs(q);
+    return response;
   }
 }
