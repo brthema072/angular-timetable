@@ -1,4 +1,10 @@
 <app-modal-options [timeTable]="timetableModel"></app-modal-options>
 
-<lib-angular-timetable [startHourOffice]="startOffice" [endHourOffice]="endOffice" (applyTimeEmitter)="getClickedTime($event)"
-    (daysOfWeekEmitter)="getDaysOfWeek($event)" [openModel]="true" [scheduledDaysAndHours]="scheduledDaysAndHours"></lib-angular-timetable>
+<ng-container *ngIf="!admin">
+    <lib-angular-timetable [startHourOffice]="startOffice" [endHourOffice]="endOffice" (applyTimeEmitter)="getClickedTime($event)"
+        (daysOfWeekEmitter)="getDaysOfWeek($event)" [openModel]="true" [scheduledDaysAndHours]="scheduledDaysAndHours"></lib-angular-timetable>
+</ng-container>
+
+<ng-container *ngIf="admin">
+    <app-admin-area [agendas]="agendas"></app-admin-area>
+</ng-container>

@@ -1,0 +1,9 @@
+.row{
+    margin: 0 25px 0 25px;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

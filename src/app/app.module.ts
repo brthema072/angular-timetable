@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalConfirmTimeComponent } from './presenter/components/modal-confirm-time/modal-confirm-time.component';
 import { AllertLoginComponent } from './presenter/components/allert-login/allert-login.component';
 import { AlertRegisterComponent } from './presenter/components/alert-register/alert-register.component';
+import { AdminAreaComponent } from './presenter/components/admin-area/admin-area.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AlertRegisterComponent } from './presenter/components/alert-register/al
     ModalOptionsComponent,
     ModalConfirmTimeComponent,
     AllertLoginComponent,
-    AlertRegisterComponent
+    AlertRegisterComponent,
+    AdminAreaComponent
   ],
   imports: [
     BrowserModule,

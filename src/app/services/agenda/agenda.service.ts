@@ -35,4 +35,11 @@ export class AgendaService {
     let response = await getDocs(q);
     return response;
   }
+
+  async getAgendaTimeInterval(minDate: string){
+    console.log(minDate)
+    let q = query(this.agendaReference, where("day", ">=", minDate))
+    let response = await getDocs(q);
+    return response;
+  }
 }

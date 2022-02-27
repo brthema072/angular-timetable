@@ -1,0 +1,38 @@
+<ng-container *ngIf="agendas != undefined">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" *ngFor="let agenda of agendas">
+            <div class="card text-white bg-success mb-3" *ngIf="checkFutureDate(agenda) == 'future'">
+                <div class="card-header bg-transparent">
+                    {{ agenda.day }} - {{ agenda.hour }}
+                    <span class="badge rounded-pill bg-light text-dark">Próximas datas</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ agenda.username }}</h5>
+                </div>
+                <div class="card-footer bg-transparent bg-success">Telefone: {{ agenda.phone }}. E-mail: {{ agenda.email }}</div>
+            </div>
+
+            <div class="card text-white bg-primary mb-3" *ngIf="checkFutureDate(agenda) == 'now'">
+                <div class="card-header">
+                    {{ agenda.day }} - {{ agenda.hour }}
+                    <span class="badge rounded-pill bg-light text-dark">Datas atuais</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ agenda.username }}</h5>
+                </div>
+                <div class="card-footer bg-primary">Telefone: {{ agenda.phone }}. E-mail: {{ agenda.email }}</div>
+            </div>
+
+            <div class="card text-white bg-danger  mb-3" *ngIf="checkFutureDate(agenda) == 'past'">
+                <div class="card-header">
+                    {{ agenda.day }} - {{ agenda.hour }}
+                    <span class="badge rounded-pill bg-light text-dark">Datas passadas</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ agenda.username }}</h5>
+                </div>
+                <div class="card-footer bg-danger ">Telefone: {{ agenda.phone }}. E-mail: {{ agenda.email }}</div>
+            </div>
+        </div>
+    </div>
+</ng-container>
