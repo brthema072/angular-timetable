@@ -1,10 +1,11 @@
 <!-- Button trigger modal -->
-<div class="d-flex flex-row-reverse bd-highlight">
-    <button type="button" class="btn btn-warning float-sm-right col-lg-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+<div class="d-flex bd-highlight">
+    <h4>Agenda de Horários</h4>
+    <button type="button" class="btn btn-warning col-lg-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
         *ngIf="!userLocalStorage">
         Entrar
     </button>
-    <button type="button" class="btn btn-warning float-sm-right col-lg-1" (click)="logout()"
+    <button type="button" class="btn btn-warning col-lg-1" (click)="logout()"
         *ngIf="userLocalStorage">
         Sair
     </button>

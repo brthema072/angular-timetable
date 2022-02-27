@@ -1,3 +1,19 @@
 .btn-warning{
     color: white;
 }
+
+.d-flex{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background-color: #f3f5f7 ;
+    margin: 15px 0 15px 0;
+}
+
+h4{
+    margin: 10px 0 10px 10px;
+}
+
+.btn-warning{
+    margin: 10px 10px 10px 0;
+}
