@@ -153,10 +153,11 @@ export class AngularTimetableComponent implements OnInit, AfterViewInit {
       let numero2 = +(b[0].toString() + b[1].toString())
 
       if((numero1 > 0 && numero1 <= 5) || (numero2 > 0 && numero2 <= 5)){
-        if((numero1 > 0 && numero1 <= 5) && (numero2 > 0 && numero2 <= 5) && numero1 > numero2){
+        if(numero1 > numero2){
           return 1
+        }else{
+          return -1
         }
-        return -1
       }
 
       return 0
@@ -230,6 +231,20 @@ export class AngularTimetableComponent implements OnInit, AfterViewInit {
       })
     })
     
+  }
+
+  nextWeek(){
+    let monday = this.headerDays[0]
+
+    let nextMonday = +monday.substring(0, 2) + 7
+    
+    this.date = new Date(this.headerDays[0].replace(monday.substring(0, 2), nextMonday.toString()))
+    console.log(this.date)
+    this.getDaysOfWeek()
+  }
+
+  previousWeek(){
+    console.log(this.date)
   }
 
 }
