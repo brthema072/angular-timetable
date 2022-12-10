@@ -73,7 +73,14 @@ export class AngularTimetableComponent implements OnInit, AfterViewInit {
     ) + "/" + this.date.getFullYear()
   }
 
-  formatDateByParameter(day: number, month: number, year: number): string{
+  usEnFormatDate(date: string): Date{
+    let day = +date.substring(0, 2)
+    let month = +date.substring(3, 5)
+    let year = +date.substring(6, 10)
+    return new Date(year + '-' + month + '-' + day)
+  }
+
+  ptBrFormatDate(day: number, month: number, year: number): string{
     return ( day <= 9 ? "0" + day : day
       ) + "/" + (
         month <= 9 ? "0" + month : month
@@ -95,10 +102,10 @@ export class AngularTimetableComponent implements OnInit, AfterViewInit {
 
       auxDay = 31 + day
       auxMonth = this.date.getMonth()
-      this.headerDays.push(this.formatDateByParameter(auxDay, auxMonth, this.date.getFullYear()))
+      this.headerDays.push(this.ptBrFormatDate(auxDay, auxMonth, this.date.getFullYear()))
 
     }else{
-      this.headerDays.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
+      this.headerDays.push(this.ptBrFormatDate(day, this.date.getMonth() + 1, this.date.getFullYear()))
     }
   }
   
@@ -126,12 +133,12 @@ export class AngularTimetableComponent implements OnInit, AfterViewInit {
       if((this.date.getMonth() + 1 == 2 && day > 28) ||
           (this.validateMonthsWih31Days(this.date.getMonth() + 1) && day > 31)){
         auxDay++
-        this.headerDays.push(this.formatDateByParameter(auxDay, this.date.getMonth() + 2, this.date.getFullYear()))
+        this.headerDays.push(this.ptBrFormatDate(auxDay, this.date.getMonth() + 2, this.date.getFullYear()))
       }else if(!this.validateMonthsWih31Days(this.date.getMonth() + 1) && day > 30){
         auxDay++
-        this.headerDays.push(this.formatDateByParameter(auxDay, this.date.getMonth() + 2, this.date.getFullYear()))
+        this.headerDays.push(this.ptBrFormatDate(auxDay, this.date.getMonth() + 2, this.date.getFullYear()))
       }else{
-        this.headerDays.push(this.formatDateByParameter(day, this.date.getMonth() + 1, this.date.getFullYear()))
+        this.headerDays.push(this.ptBrFormatDate(day, this.date.getMonth() + 1, this.date.getFullYear()))
       }
     }
   }
@@ -236,14 +243,21 @@ export class AngularTimetableComponent implements OnInit, AfterViewInit {
   nextWeek(){
     let monday = this.headerDays[0]
 
-    let nextMonday = +monday.substring(0, 2) + 7
+    let nextMonday = this.usEnFormatDate(monday)
+    nextMonday.setDate(nextMonday.getDate() + 7)
     
-    this.date = new Date(this.headerDays[0].replace(monday.substring(0, 2), nextMonday.toString()))
+    this.date = nextMonday
     console.log(this.date)
-    this.getDaysOfWeek()
+    // this.getDaysOfWeek()
   }
 
   previousWeek(){
+    let monday = this.headerDays[0]
+
+    let previousMonday =  this.usEnFormatDate(monday)
+    previousMonday.setDate(previousMonday.getDate() - 7)
+    
+    this.date = previousMonday
     console.log(this.date)
   }
 
